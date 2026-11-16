@@ -22,11 +22,11 @@ document.querySelectorAll('.ba input').forEach(function(r){
 (function(){
   var LINKS = /*WA_LINKS*/{};
   var HERO = {
-    implante:   ['Implantes dentários em Itajaí', 'Volte a mastigar e sorrir <span class="serif">com firmeza.</span>', 'Implantes com o Dr. Vinícius, cirurgião-dentista e técnico em prótese há 8 anos. Planejamento cuidadoso e o olhar de quem fabrica dentes em cada detalhe.'],
-    protese:    ['Próteses dentárias em Itajaí', 'Sua prótese confortável, natural <span class="serif">e feita sob medida.</span>', 'O Dr. Vinícius é cirurgião-dentista e técnico em prótese há 8 anos. Ele avalia o seu caso, confecciona a prótese no laboratório próprio e acompanha cada ajuste.'],
-    lentes:     ['Lentes de contato dental em Itajaí', 'Um sorriso mais harmônico, <span class="serif">com naturalidade.</span>', 'Lentes de contato dental planejadas para o seu rosto pelo Dr. Vinícius, cirurgião-dentista e técnico em prótese há 8 anos.'],
+    implante:   ['Implantes dentários em Itajaí', 'Volte a mastigar e sorrir <span class="serif">com firmeza.</span>', 'Implantes com o Dr. Vinícius, cirurgião-dentista e técnico em prótese há 10 anos. Planejamento cuidadoso e o olhar de quem fabrica dentes em cada detalhe.'],
+    protese:    ['Próteses dentárias em Itajaí', 'Sua prótese confortável, natural <span class="serif">e feita sob medida.</span>', 'O Dr. Vinícius é cirurgião-dentista e técnico em prótese há 10 anos. Ele avalia o seu caso, confecciona a prótese no laboratório próprio e acompanha cada ajuste.'],
+    lentes:     ['Lentes de contato dental em Itajaí', 'Um sorriso mais harmônico, <span class="serif">com naturalidade.</span>', 'Lentes de contato dental planejadas para o seu rosto pelo Dr. Vinícius, cirurgião-dentista e técnico em prótese há 10 anos.'],
     clareamento:['Clareamento dental em Itajaí', 'Dentes mais claros para <span class="serif">sorrir sem receio.</span>', 'Clareamento com acompanhamento profissional do Dr. Vinícius, do início ao fim, ajustado ao seu caso.'],
-    estetica:   ['Lentes e clareamento em Itajaí', 'Estética do sorriso <span class="serif">com naturalidade.</span>', 'Lentes de contato dental e clareamento com o Dr. Vinícius, cirurgião-dentista e técnico em prótese há 8 anos. Cada detalhe pensado para o seu rosto.']
+    estetica:   ['Lentes e clareamento em Itajaí', 'Estética do sorriso <span class="serif">com naturalidade.</span>', 'Lentes de contato dental e clareamento com o Dr. Vinícius, cirurgião-dentista e técnico em prótese há 10 anos. Cada detalhe pensado para o seu rosto.']
   };
   var s = (new URLSearchParams(location.search).get('s') || '').toLowerCase();
   if(!HERO[s]) return;
