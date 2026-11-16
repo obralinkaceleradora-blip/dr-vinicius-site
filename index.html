@@ -141,6 +141,13 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .mist .pillar,.mist .journey{background:#fff}
 .mist .journey{box-shadow:var(--shadow)}
 
+/* trabalhos do laboratório (dentro do diferencial) */
+.lab-head{display:grid;gap:6px;margin:clamp(48px,6vw,72px) 0 22px}
+.lab-head h3{font-size:clamp(1.3rem,2.2vw,1.6rem)}
+.lab-head p{color:var(--muted)}
+.swipe-hint{display:none}
+.mist .faq details:not([open]),.mist .creds li,.mist .lab-badge{background:#fff}
+
 /* tratamentos */
 .treat{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
 .t-card{background:#fff;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);display:grid;grid-template-rows:auto 1fr}
@@ -223,9 +230,17 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   .badge.b2{bottom:10%}
   .badge.b3{left:0;bottom:auto;top:44%}
   .pillars,.steps{grid-template-columns:1fr}
+  .pillars{gap:12px}
+  .pillar{grid-template-columns:44px 1fr;column-gap:16px;row-gap:4px;padding:20px}
+  .pillar i{grid-row:span 2;width:44px;height:44px;margin:0}
   .about-photo{aspect-ratio:5/4}
-  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .gallery img:nth-child(1),.gallery img:nth-child(6){grid-row:auto;aspect-ratio:1;height:auto}
+  .gallery{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:2px;padding-bottom:6px;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .gallery::-webkit-scrollbar{display:none}
+  .gallery img{flex:0 0 72%;aspect-ratio:4/5;height:auto;scroll-snap-align:start}
+  .gallery img:nth-child(1),.gallery img:nth-child(6){grid-row:auto;aspect-ratio:4/5;height:auto}
+  .swipe-hint{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:.82rem;color:var(--muted)}
+  .swipe-hint::before{content:"";width:28px;height:2px;border-radius:2px;background:var(--navy);opacity:.4}
 }
 @media (max-width:560px){
   body{font-size:16px}
@@ -348,11 +363,23 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
       <div class="pillar"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg></i><h3>Um sorriso que combina com você</h3><p>Cor, formato e tamanho dos dentes pensados para o seu rosto, para um resultado com aparência natural.</p></div>
       <div class="pillar"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8Z"/></svg></i><h3>Acompanhamento até o fim</h3><p>Provas e ajustes com calma, até você se sentir seguro para falar, sorrir e mastigar.</p></div>
     </div>
-    <div class="journey">
-      <figure><img src="img/caso3-antes-816bc4f5.webp" alt="Prótese superior sobre o modelo de gesso, no laboratório" width="532" height="473" decoding="async" loading="lazy"><figcaption>Na bancada do laboratório</figcaption></figure>
-      <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      <figure><img src="img/caso3-depois-8a81bd03.webp" alt="Paciente sorrindo com a mesma prótese instalada" width="532" height="473" decoding="async" loading="lazy"><figcaption>No sorriso do paciente</figcaption></figure>
+    <div class="lab-head">
+      <h3>Trabalhos confeccionados pelo Dr. Vinícius</h3>
+      <p>Cada peça passa pela bancada dele antes de chegar ao paciente.</p>
     </div>
+    <div class="gallery" tabindex="0" aria-label="Galeria de trabalhos do laboratório">
+      <img src="img/g3-563bcf2c.webp" alt="Prótese total vista de lado" width="615" height="768" decoding="async" loading="lazy">
+      <img src="img/g1-2eb2db5d.webp" alt="Protocolo superior sobre o modelo de gesso" width="576" height="768" decoding="async" loading="lazy">
+      <img src="img/g2-f0a016b7.webp" alt="Prótese inferior com gengiva caracterizada" width="576" height="768" decoding="async" loading="lazy">
+      <img src="img/g8-d4eab5b3.webp" alt="Protocolos prontos para entrega" width="576" height="768" decoding="async" loading="lazy">
+      <img src="img/g7-bb93fe45.webp" alt="Prótese montada no articulador" width="576" height="768" decoding="async" loading="lazy">
+      <img src="img/hero-128b0195.webp" alt="Prótese total superior e inferior com gengiva caracterizada" width="576" height="768" decoding="async" loading="lazy">
+      <img src="img/g11-c2b4405c.webp" alt="Prótese superior vista por dentro" width="576" height="768" decoding="async" loading="lazy">
+      <img src="img/g4-2949fccf.webp" alt="Prótese total superior e inferior vista de frente" width="615" height="768" decoding="async" loading="lazy">
+      <img src="img/g5-bf757400.webp" alt="Prótese total sobre a base de gesso" width="576" height="768" decoding="async" loading="lazy">
+      <img src="img/g12-c0b65573.webp" alt="Prótese total com gengiva caracterizada" width="576" height="768" decoding="async" loading="lazy">
+    </div>
+    <p class="swipe-hint" aria-hidden="true">Arraste para o lado para ver mais</p>
   </div>
 </section>
 
@@ -372,29 +399,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   </div>
 </section>
 
-<section class="mist" id="laboratorio">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="pill">Do laboratório</span>
-      <h2>Trabalhos confeccionados <span class="serif">pelo Dr. Vinícius</span></h2>
-      <p class="lead">Cada peça passa pela bancada dele antes de chegar ao paciente.</p>
-    </div>
-    <div class="gallery">
-      <img src="img/g3-563bcf2c.webp" alt="Prótese total vista de lado" width="615" height="768" decoding="async" loading="lazy">
-      <img src="img/g1-2eb2db5d.webp" alt="Protocolo superior sobre o modelo de gesso" width="576" height="768" decoding="async" loading="lazy">
-      <img src="img/g2-f0a016b7.webp" alt="Prótese inferior com gengiva caracterizada" width="576" height="768" decoding="async" loading="lazy">
-      <img src="img/g8-d4eab5b3.webp" alt="Protocolos prontos para entrega" width="576" height="768" decoding="async" loading="lazy">
-      <img src="img/g7-bb93fe45.webp" alt="Prótese montada no articulador" width="576" height="768" decoding="async" loading="lazy">
-      <img src="img/hero-128b0195.webp" alt="Prótese total superior e inferior com gengiva caracterizada" width="576" height="768" decoding="async" loading="lazy">
-      <img src="img/g11-c2b4405c.webp" alt="Prótese superior vista por dentro" width="576" height="768" decoding="async" loading="lazy">
-      <img src="img/g4-2949fccf.webp" alt="Prótese total superior e inferior vista de frente" width="615" height="768" decoding="async" loading="lazy">
-      <img src="img/g5-bf757400.webp" alt="Prótese total sobre a base de gesso" width="576" height="768" decoding="async" loading="lazy">
-      <img src="img/g12-c0b65573.webp" alt="Prótese total com gengiva caracterizada" width="576" height="768" decoding="async" loading="lazy">
-    </div>
-  </div>
-</section>
 
-<section class="about" id="sobre">
+<section class="mist about" id="sobre">
   <div class="wrap">
     <figure class="about-photo"><img src="img/vinicius-lab-df122dbb.webp" alt="Dr. Vinícius trabalhando no laboratório de prótese" width="532" height="899" decoding="async" loading="lazy"></figure>
     <div class="about-copy">
@@ -413,7 +419,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   </div>
 </section>
 
-<section class="mist" id="avaliacao">
+<section id="avaliacao">
   <div class="wrap">
     <div class="sec-head center">
       <span class="pill">Avaliação gratuita</span>
@@ -427,7 +433,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   </div>
 </section>
 
-<section id="duvidas">
+<section class="mist" id="duvidas">
   <div class="wrap faq-wrap">
     <div class="sec-head">
       <span class="pill">Dúvidas frequentes</span>

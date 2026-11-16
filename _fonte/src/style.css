@@ -125,6 +125,13 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .mist .pillar,.mist .journey{background:#fff}
 .mist .journey{box-shadow:var(--shadow)}
 
+/* trabalhos do laboratório (dentro do diferencial) */
+.lab-head{display:grid;gap:6px;margin:clamp(48px,6vw,72px) 0 22px}
+.lab-head h3{font-size:clamp(1.3rem,2.2vw,1.6rem)}
+.lab-head p{color:var(--muted)}
+.swipe-hint{display:none}
+.mist .faq details:not([open]),.mist .creds li,.mist .lab-badge{background:#fff}
+
 /* tratamentos */
 .treat{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
 .t-card{background:#fff;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);display:grid;grid-template-rows:auto 1fr}
@@ -207,9 +214,17 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   .badge.b2{bottom:10%}
   .badge.b3{left:0;bottom:auto;top:44%}
   .pillars,.steps{grid-template-columns:1fr}
+  .pillars{gap:12px}
+  .pillar{grid-template-columns:44px 1fr;column-gap:16px;row-gap:4px;padding:20px}
+  .pillar i{grid-row:span 2;width:44px;height:44px;margin:0}
   .about-photo{aspect-ratio:5/4}
-  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .gallery img:nth-child(1),.gallery img:nth-child(6){grid-row:auto;aspect-ratio:1;height:auto}
+  .gallery{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:2px;padding-bottom:6px;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .gallery::-webkit-scrollbar{display:none}
+  .gallery img{flex:0 0 72%;aspect-ratio:4/5;height:auto;scroll-snap-align:start}
+  .gallery img:nth-child(1),.gallery img:nth-child(6){grid-row:auto;aspect-ratio:4/5;height:auto}
+  .swipe-hint{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:.82rem;color:var(--muted)}
+  .swipe-hint::before{content:"";width:28px;height:2px;border-radius:2px;background:var(--navy);opacity:.4}
 }
 @media (max-width:560px){
   body{font-size:16px}
