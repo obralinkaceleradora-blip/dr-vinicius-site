@@ -77,3 +77,25 @@ document.querySelectorAll('.ba input').forEach(function(r){
     root.classList.toggle('show-bar', passou);
   }).observe(cta);
 })();
+/* celular: galeria do laboratório rola sozinha; pausa quando a pessoa toca e quando sai da tela */
+(function(){
+  var g = document.querySelector('#diferencial .gallery');
+  if(!g || !window.matchMedia) return;
+  var mobile = matchMedia('(max-width: 860px)'), reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  var timer = null, visible = false, pausedUntil = 0, DELAY = 2800;
+  function items(){ return Array.prototype.slice.call(g.children); }
+  function next(){
+    if(!mobile.matches || reduce.matches || !visible || Date.now() < pausedUntil || document.hidden) return;
+    var list = items(), base = list[0].offsetLeft, cur = 0;
+    list.forEach(function(el, i){ if(Math.abs(el.offsetLeft - base - g.scrollLeft) < Math.abs(list[cur].offsetLeft - base - g.scrollLeft)) cur = i; });
+    var atEnd = g.scrollLeft + g.clientWidth >= g.scrollWidth - 4;
+    var to = atEnd ? 0 : list[Math.min(cur + 1, list.length - 1)].offsetLeft - base;
+    g.scrollTo({left: to, behavior: 'smooth'});
+  }
+  function pause(){ pausedUntil = Date.now() + 6000; }
+  ['pointerdown','touchstart','wheel','keydown'].forEach(function(ev){ g.addEventListener(ev, pause, {passive:true}); });
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){ visible = es[0].isIntersecting; }, {threshold:.6}).observe(g);
+  } else visible = true;
+  timer = setInterval(next, DELAY);
+})();
