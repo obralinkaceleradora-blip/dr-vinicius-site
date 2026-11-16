@@ -50,17 +50,19 @@
     function used(){ box._used = true; if(!sent){ sent = true; dl.push({event:'comparou_antes_depois', caso:input.id}); } }
     function at(e){ var r = box.getBoundingClientRect(); set((e.clientX - r.left) / r.width * 100); }
     function end(){ down = null; drag = false; box.classList.remove('dragging'); }
-    input.addEventListener('input', function(){ set(+input.value); used(); });
+    /* só conta como uso um gesto real da pessoa: valor restaurado pelo navegador (ou pela prévia) não cancela a dica animada */
+    input.addEventListener('input', function(e){ set(+input.value); if(e.isTrusted) used(); });
     if(!window.PointerEvent){ input.style.pointerEvents = 'auto'; return; }
     box.addEventListener('pointerdown', function(e){
       if(e.button) return;
-      down = e.clientX;
+      down = [e.clientX, e.clientY];
       if(e.pointerType === 'mouse'){ drag = true; box.classList.add('dragging'); at(e); used(); try{ box.setPointerCapture(e.pointerId); }catch(_){} }
     });
     box.addEventListener('pointermove', function(e){
       if(down === null) return;
       /* no toque, só começa depois de um movimento lateral: tocar para rolar a página não mexe na foto */
-      if(!drag && Math.abs(e.clientX - down) > 6){ drag = true; box.classList.add('dragging'); used(); try{ box.setPointerCapture(e.pointerId); }catch(_){} }
+      var dx = Math.abs(e.clientX - down[0]), dy = Math.abs(e.clientY - down[1]);
+      if(!drag && dx > 8 && dx > dy * 1.5){ drag = true; box.classList.add('dragging'); used(); try{ box.setPointerCapture(e.pointerId); }catch(_){} }
       if(drag) at(e);
     });
     ['pointerup','pointercancel','lostpointercapture'].forEach(function(ev){ box.addEventListener(ev, end); });
