@@ -27,6 +27,7 @@ for k,n in pick.items(): jobs[k] = src(n)
 jobs['retrato'] = Image.open(raw/'retrato-recorte.png').convert('RGBA')
 for k,f,h in [('logo-dr','logo-dr-escuro.png',96),('logo-maestria','logo-maestria.png',120)]:
     im = Image.open(raw/f).convert('RGBA'); jobs[k] = im.resize((round(im.width*h/im.height), h), Image.LANCZOS)
+jobs['lentes'] = Image.open(raw/'capa-lentes.jpg').convert('RGB')  # capa do card de lentes
 jobs['retrato-m'] = jobs['retrato'].resize((520, round(jobs['retrato'].height*520/jobs['retrato'].width)), Image.LANCZOS)
 og = raw/'og.png'
 m = {}
