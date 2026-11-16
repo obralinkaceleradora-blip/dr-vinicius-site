@@ -104,6 +104,16 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .badge.b2{right:0;bottom:14%}
 .badge.b3{left:2%;bottom:4%}
 
+/* faixa animada de diferenciais */
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.ticker{background:var(--navy);color:#fff;overflow:hidden;padding-block:18px}
+.ticker-track{display:flex;width:max-content;animation:ticker 38s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.ticker-row{display:flex;align-items:center;gap:28px;padding-right:28px;flex:none}
+.ticker-row span{font-weight:700;font-size:clamp(1rem,1.6vw,1.2rem);letter-spacing:-.01em;white-space:nowrap}
+.ticker-row svg{width:16px;height:16px;color:#8fb8e3;flex:none}
+@keyframes ticker{to{transform:translateX(-50%)}}
+
 /* resultados */
 .cases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
 .case{background:#fff;border-radius:var(--r);padding:10px;box-shadow:var(--shadow);display:grid;gap:12px;align-content:start}
@@ -142,9 +152,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .mist .journey{box-shadow:var(--shadow)}
 
 /* trabalhos do laboratório (dentro do diferencial) */
-.lab-head{display:grid;gap:6px;margin:clamp(48px,6vw,72px) 0 22px}
-.lab-head h3{font-size:clamp(1.3rem,2.2vw,1.6rem)}
-.lab-head p{color:var(--muted)}
 .swipe-hint{display:none}
 .mist .faq details:not([open]),.mist .creds li,.mist .lab-badge{background:#fff}
 
@@ -255,7 +262,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   .float span{display:none}
   .float{width:60px;height:60px;padding:0}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.faq summary::after{transition:none}}
+@media (prefers-reduced-motion:reduce){.ticker-track{animation:none}.ticker{overflow-x:auto}html{scroll-behavior:auto}.btn,.faq summary::after{transition:none}}
 </style>
 </head>
 <body>
@@ -298,6 +305,11 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
     </div>
   </div>
 </section>
+
+<div class="ticker" role="region" aria-label="Diferenciais">
+  <p class="sr-only">Dentista e técnico em prótese · 10 anos de experiência · Laboratório próprio · Sorriso planejado para o seu rosto · Acompanhamento até o fim · Avaliação gratuita em Itajaí</p>
+  <div class="ticker-track" aria-hidden="true"><div class="ticker-row"><span>Dentista e técnico em prótese</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c.9 5 3.1 7.1 10 10-6.9 2.9-9.1 5-10 10-.9-5-3.1-7.1-10-10 6.9-2.9 9.1-5 10-10Z" fill="currentColor"/></svg><span>10 anos de experiência</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c.9 5 3.1 7.1 10 10-6.9 2.9-9.1 5-10 10-.9-5-3.1-7.1-10-10 6.9-2.9 9.1-5 10-10Z" fill="currentColor"/></svg><span>Laboratório próprio</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c.9 5 3.1 7.1 10 10-6.9 2.9-9.1 5-10 10-.9-5-3.1-7.1-10-10 6.9-2.9 9.1-5 10-10Z" fill="currentColor"/></svg><span>Sorriso planejado para o seu rosto</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c.9 5 3.1 7.1 10 10-6.9 2.9-9.1 5-10 10-.9-5-3.1-7.1-10-10 6.9-2.9 9.1-5 10-10Z" fill="currentColor"/></svg><span>Acompanhamento até o fim</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c.9 5 3.1 7.1 10 10-6.9 2.9-9.1 5-10 10-.9-5-3.1-7.1-10-10 6.9-2.9 9.1-5 10-10Z" fill="currentColor"/></svg><span>Avaliação gratuita em Itajaí</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c.9 5 3.1 7.1 10 10-6.9 2.9-9.1 5-10 10-.9-5-3.1-7.1-10-10 6.9-2.9 9.1-5 10-10Z" fill="currentColor"/></svg></div><div class="ticker-row"><span>Dentista e técnico em prótese</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c.9 5 3.1 7.1 10 10-6.9 2.9-9.1 5-10 10-.9-5-3.1-7.1-10-10 6.9-2.9 9.1-5 10-10Z" fill="currentColor"/></svg><span>10 anos de experiência</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c.9 5 3.1 7.1 10 10-6.9 2.9-9.1 5-10 10-.9-5-3.1-7.1-10-10 6.9-2.9 9.1-5 10-10Z" fill="currentColor"/></svg><span>Laboratório próprio</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c.9 5 3.1 7.1 10 10-6.9 2.9-9.1 5-10 10-.9-5-3.1-7.1-10-10 6.9-2.9 9.1-5 10-10Z" fill="currentColor"/></svg><span>Sorriso planejado para o seu rosto</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c.9 5 3.1 7.1 10 10-6.9 2.9-9.1 5-10 10-.9-5-3.1-7.1-10-10 6.9-2.9 9.1-5 10-10Z" fill="currentColor"/></svg><span>Acompanhamento até o fim</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c.9 5 3.1 7.1 10 10-6.9 2.9-9.1 5-10 10-.9-5-3.1-7.1-10-10 6.9-2.9 9.1-5 10-10Z" fill="currentColor"/></svg><span>Avaliação gratuita em Itajaí</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c.9 5 3.1 7.1 10 10-6.9 2.9-9.1 5-10 10-.9-5-3.1-7.1-10-10 6.9-2.9 9.1-5 10-10Z" fill="currentColor"/></svg></div></div>
+</div>
 
 <section id="resultados">
   <div class="wrap">
@@ -372,16 +384,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
     <div class="sec-head">
       <span class="pill">Por que o Dr. Vinícius</span>
       <h2>O olhar de quem fabrica dentes <span class="serif">em cada detalhe</span></h2>
-      <p class="lead">São 10 anos de experiência em prótese dentária, a maior parte deles na bancada do laboratório. Essa vivência está em cada tratamento, do implante à lente de contato.</p>
-    </div>
-    <div class="pillars">
-      <div class="pillar"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11V7a5 5 0 0 1 10 0v4"/><path d="M5 11h14v10H5z"/><path d="M12 15v2"/></svg></i><h3>Quem planeja é quem fabrica</h3><p>O mesmo profissional que examina a sua boca confecciona a prótese no laboratório próprio. Nada se perde no caminho.</p></div>
-      <div class="pillar"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9L12 3Z"/></svg></i><h3>Um sorriso que combina com você</h3><p>Cor, formato e tamanho dos dentes pensados para o seu rosto, para um resultado com aparência natural.</p></div>
-      <div class="pillar"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8Z"/></svg></i><h3>Acompanhamento até o fim</h3><p>Provas e ajustes com calma, até você se sentir seguro para falar, sorrir e mastigar.</p></div>
-    </div>
-    <div class="lab-head">
-      <h3>Trabalhos confeccionados pelo Dr. Vinícius</h3>
-      <p>Cada peça passa pela bancada dele antes de chegar ao paciente.</p>
+      <p class="lead">10 anos fabricando dentes no laboratório. Por isso ele planeja cada sorriso pensando em cor, formato e naturalidade. Veja alguns trabalhos feitos por ele.</p>
     </div>
     <div class="gallery" tabindex="0" aria-label="Galeria de trabalhos do laboratório">
       <img src="img/g3-563bcf2c.webp" alt="Prótese total vista de lado" width="615" height="768" decoding="async" loading="lazy">

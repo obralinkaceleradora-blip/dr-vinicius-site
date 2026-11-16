@@ -88,6 +88,16 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .badge.b2{right:0;bottom:14%}
 .badge.b3{left:2%;bottom:4%}
 
+/* faixa animada de diferenciais */
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.ticker{background:var(--navy);color:#fff;overflow:hidden;padding-block:18px}
+.ticker-track{display:flex;width:max-content;animation:ticker 38s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.ticker-row{display:flex;align-items:center;gap:28px;padding-right:28px;flex:none}
+.ticker-row span{font-weight:700;font-size:clamp(1rem,1.6vw,1.2rem);letter-spacing:-.01em;white-space:nowrap}
+.ticker-row svg{width:16px;height:16px;color:#8fb8e3;flex:none}
+@keyframes ticker{to{transform:translateX(-50%)}}
+
 /* resultados */
 .cases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
 .case{background:#fff;border-radius:var(--r);padding:10px;box-shadow:var(--shadow);display:grid;gap:12px;align-content:start}
@@ -126,9 +136,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .mist .journey{box-shadow:var(--shadow)}
 
 /* trabalhos do laboratório (dentro do diferencial) */
-.lab-head{display:grid;gap:6px;margin:clamp(48px,6vw,72px) 0 22px}
-.lab-head h3{font-size:clamp(1.3rem,2.2vw,1.6rem)}
-.lab-head p{color:var(--muted)}
 .swipe-hint{display:none}
 .mist .faq details:not([open]),.mist .creds li,.mist .lab-badge{background:#fff}
 
@@ -239,4 +246,4 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   .float span{display:none}
   .float{width:60px;height:60px;padding:0}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.faq summary::after{transition:none}}
+@media (prefers-reduced-motion:reduce){.ticker-track{animation:none}.ticker{overflow-x:auto}html{scroll-behavior:auto}.btn,.faq summary::after{transition:none}}
