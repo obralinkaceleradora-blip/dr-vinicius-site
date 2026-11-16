@@ -176,7 +176,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .creds b{font-variant-numeric:tabular-nums;color:var(--navy);font-weight:800}
 .creds small{display:block;font-size:.84rem;font-weight:400;color:var(--muted);margin-top:2px}
 .about-copy .btn{justify-self:start}
-.about-photo figcaption{position:absolute;left:16px;bottom:16px;right:16px;width:max-content;max-width:calc(100% - 32px);padding:9px 14px;border-radius:12px;
+.about-photo figcaption{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);width:max-content;max-width:calc(100% - 36px);text-align:center;padding:9px 16px;border-radius:12px;
   background:rgba(255,255,255,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:.82rem;font-weight:600;color:var(--ink)}
 
 /* etapas */
