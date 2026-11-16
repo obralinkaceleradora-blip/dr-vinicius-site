@@ -19,7 +19,7 @@ def tarja(im, box):
     ImageDraw.Draw(im).rectangle(box, fill=(0,0,0)); return im
 jobs['caso4-antes'] = tarja(src('039'), TARJA['039']); jobs['caso4-depois'] = tarja(src('040'), TARJA['040'])
 jobs['paciente-5'] = tarja(src('041'), TARJA['041']); jobs['paciente-6'] = src('238')
-jobs['vinicius-lab'] = Image.open(raw/'vinicius-lab2.jpg').convert('RGB')  # foto nova no laboratório (já desespelhada)
+jobs['vinicius-lab'] = Image.open(raw/'vinicius-lab2.jpg').convert('RGB').crop((40, 110, 1186, 1890))  # ele + maçarico + chama, sem teto e sem bancada sobrando  # foto nova no laboratório (já desespelhada)
 jobs['vinicius'] = src('001')
 pick = {'hero':'084','protocolo':'063','total':'085','ppr':'129','placa':'140',
  'g1':'061','g2':'073','g3':'193','g4':'195','g5':'302','g6':'182','g7':'279','g8':'301','g9':'074','g10':'162','g11':'173','g12':'083'}
