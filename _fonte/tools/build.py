@@ -10,7 +10,17 @@ CFG = {
   'gtm': '',  # ex.: GTM-XXXXXXX (preencher quando tiver)
   'dominio': 'https://www.SEU-DOMINIO.com.br/',
 }
-WA = f"https://wa.me/{CFG['whatsapp']}?text={urllib.parse.quote(CFG['mensagem'])}"
+# mensagem do WhatsApp por serviço (cards e links com ?s=servico na URL do anúncio)
+MSGS = {
+  '': CFG['mensagem'],
+  'implante': 'Olá, vim pelo site e gostaria de agendar uma avaliação gratuita para implante.',
+  'protese': 'Olá, vim pelo site e gostaria de agendar uma avaliação gratuita para prótese.',
+  'lentes': 'Olá, vim pelo site e gostaria de agendar uma avaliação gratuita para lentes de contato dental.',
+  'clareamento': 'Olá, vim pelo site e gostaria de agendar uma avaliação gratuita para clareamento.',
+  'estetica': 'Olá, vim pelo site e gostaria de agendar uma avaliação gratuita para lentes ou clareamento.',
+}
+def wa(key=''): return f"https://wa.me/{CFG['whatsapp']}?text={urllib.parse.quote(MSGS[key])}"
+WA = wa()
 WA_SVG = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>'
 
 def render(embed):
@@ -26,13 +36,14 @@ def render(embed):
         extra = ' fetchpriority="high"' if eager else ' loading="lazy"'
         return f'<img src="{s}" alt="{alt}" width="{d["w"]}" height="{d["h"]}" decoding="async"{extra}>'
     html = re.sub(r'\{\{IMG:([^}]+)\}\}', img, html)
+    html = re.sub(r'\{\{WA:(\w+)\}\}', lambda m: wa(m.group(1)).replace('&', '&amp;'), html)
     return html.replace('{{WA}}', WA.replace('&', '&amp;')).replace('{{WA_SVG}}', WA_SVG)
 
 css = (src/'style.css').read_text()
-js = (src/'app.js').read_text()
+js = (src/'app.js').read_text().replace('/*WA_LINKS*/{}', json.dumps({k: wa(k) for k in MSGS}, ensure_ascii=False))
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">'
-TITLE = 'Prótese Dentária e Protocolo em Itajaí | Dr. Vinícius Trierweiler'
-DESC = 'Dentista e técnico em prótese há 8 anos, com laboratório próprio. Prótese total, protocolo sobre implantes e prótese parcial em Itajaí, SC. Avaliação gratuita.'
+TITLE = 'Implantes, Próteses e Lentes em Itajaí | Dr. Vinícius Trierweiler'
+DESC = 'Recupere a confiança no seu sorriso. Implantes, próteses, lentes de contato dental e clareamento em Itajaí, SC, com dentista e técnico em prótese há 8 anos. Avaliação gratuita.'
 
 schema = {
   "@context": "https://schema.org", "@type": "Dentist",
