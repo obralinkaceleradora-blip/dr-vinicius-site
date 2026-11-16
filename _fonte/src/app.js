@@ -93,6 +93,12 @@ document.querySelectorAll('.ba input').forEach(function(r){
     g.scrollTo({left: to, behavior: 'smooth'});
   }
   function pause(){ pausedUntil = Date.now() + 6000; }
+  /* indicador de posição (bolinhas) */
+  var dots = document.createElement('div'); dots.className = 'dots'; dots.setAttribute('aria-hidden','true');
+  items().forEach(function(){ dots.appendChild(document.createElement('i')); });
+  g.parentNode.insertBefore(dots, g.nextSibling);
+  function mark(){ var i = Math.round(g.scrollLeft / Math.max(1, g.clientWidth)); Array.prototype.forEach.call(dots.children, function(d, k){ d.classList.toggle('on', k === i); }); }
+  g.addEventListener('scroll', function(){ requestAnimationFrame(mark); }, {passive:true}); mark();
   ['pointerdown','touchstart','wheel','keydown'].forEach(function(ev){ g.addEventListener(ev, pause, {passive:true}); });
   if('IntersectionObserver' in window){
     new IntersectionObserver(function(es){ visible = es[0].isIntersecting; }, {threshold:.6}).observe(g);

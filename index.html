@@ -173,6 +173,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .swipe-hint{display:none}
 .mist .faq details:not([open]){background:#fff}
 
+.dots{display:none}
+
 /* tratamentos */
 .treat{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--gap)}
 .t-card{background:#fff;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);display:grid;grid-template-rows:auto 1fr}
@@ -278,7 +280,10 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
     -webkit-overflow-scrolling:touch;scrollbar-width:none}
   .gallery::-webkit-scrollbar{display:none}
   /* largura explícita: o Safari ignora flex-basis em imagem com width:100% */
-  .gallery img{flex:none;width:60%;max-width:60%;aspect-ratio:1;height:auto;scroll-snap-align:start}
+  #diferencial .gallery img{flex:none;width:100%;max-width:100%;aspect-ratio:1;height:auto;scroll-snap-align:start;scroll-snap-stop:always}
+  .dots{display:flex;justify-content:center;gap:8px;margin-top:14px}
+  .dots i{width:7px;height:7px;border-radius:99px;background:var(--line);transition:width .3s,background .3s}
+  .dots i.on{width:22px;background:var(--navy)}
   .swipe-hint{display:flex;align-items:center;gap:8px;margin-top:-4px;font-size:.82rem;font-weight:600;color:var(--navy)}
   .swipe-hint::before{content:"";width:28px;height:2px;border-radius:2px;background:var(--navy);opacity:.4}
 }
@@ -636,6 +641,12 @@ document.querySelectorAll('.ba input').forEach(function(r){
     g.scrollTo({left: to, behavior: 'smooth'});
   }
   function pause(){ pausedUntil = Date.now() + 6000; }
+  /* indicador de posição (bolinhas) */
+  var dots = document.createElement('div'); dots.className = 'dots'; dots.setAttribute('aria-hidden','true');
+  items().forEach(function(){ dots.appendChild(document.createElement('i')); });
+  g.parentNode.insertBefore(dots, g.nextSibling);
+  function mark(){ var i = Math.round(g.scrollLeft / Math.max(1, g.clientWidth)); Array.prototype.forEach.call(dots.children, function(d, k){ d.classList.toggle('on', k === i); }); }
+  g.addEventListener('scroll', function(){ requestAnimationFrame(mark); }, {passive:true}); mark();
   ['pointerdown','touchstart','wheel','keydown'].forEach(function(ev){ g.addEventListener(ev, pause, {passive:true}); });
   if('IntersectionObserver' in window){
     new IntersectionObserver(function(es){ visible = es[0].isIntersecting; }, {threshold:.6}).observe(g);
