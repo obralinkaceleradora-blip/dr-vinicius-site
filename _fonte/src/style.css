@@ -151,6 +151,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .treat{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--gap)}
 .t-card{background:#fff;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);display:grid;grid-template-rows:auto 1fr}
 .t-card img{width:100%;aspect-ratio:4/3.4;object-fit:cover;background:#0b0f15}
+/* foto em que a peça fica na parte de baixo: ancora o recorte embaixo para ela aparecer inteira */
+.t-card img.pos-bottom{object-position:center bottom}
 .t-card > div{padding:22px;display:flex;flex-direction:column;gap:8px;min-width:0}
 .t-card p{color:var(--muted);font-size:.94rem}
 .t-link{margin-top:auto;padding-top:10px;display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:.9rem;color:var(--cta);text-decoration:none}
