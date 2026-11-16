@@ -11,7 +11,7 @@
 <meta property="og:title" content="Implantes, Próteses e Lentes em Itajaí | Dr. Vinícius Trierweiler"><meta property="og:description" content="Recupere a confiança no seu sorriso. Implantes, próteses, lentes de contato dental e clareamento em Itajaí, SC, com dentista e técnico em prótese há 10 anos. Avaliação gratuita.">
 <meta property="og:image" content="https://www.SEU-DOMINIO.com.br/img/hero-128b0195.webp">
 <link rel="preload" as="image" href="img/hero-128b0195.webp" fetchpriority="high">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Jost:wght@400;500;600;700&display=swap">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Dentist", "name": "Dr. Vinícius Trierweiler", "description": "Recupere a confiança no seu sorriso. Implantes, próteses, lentes de contato dental e clareamento em Itajaí, SC, com dentista e técnico em prótese há 10 anos. Avaliação gratuita.", "url": "https://www.SEU-DOMINIO.com.br/", "telephone": "+55 47 99971-4094", "image": "https://www.SEU-DOMINIO.com.br/img/hero-128b0195.webp", "address": {"@type": "PostalAddress", "streetAddress": "Rua Luiz da Silva, 199", "addressLocality": "Itajaí", "addressRegion": "SC", "postalCode": "88311-190", "addressCountry": "BR"}, "areaServed": "Itajaí, SC"}</script>
 
 <style>/* Layout: tema claro único e arejado. Abertura com o retrato recortado sobre um gradiente azul-claro e um arco marinho atrás;
@@ -28,8 +28,10 @@
   --gold:#b08d57;       /* detalhe pontual */
   --cta:#1e9e63;
   --cta-hover:#178452;
-  --font-head:"Plus Jakarta Sans","Segoe UI",system-ui,-apple-system,sans-serif;
-  --font-accent:"Instrument Serif","Iowan Old Style",Georgia,serif;
+  --font-display:"Cormorant Garamond","Iowan Old Style","Palatino Linotype",Georgia,serif;  /* marca e títulos */
+  --font-body:"Jost","Segoe UI",system-ui,-apple-system,sans-serif;  /* textos e assinaturas */
+  --font-head:var(--font-body);
+  --font-accent:var(--font-display);
   --r-lg:28px;--r:20px;--r-sm:14px;
   --shadow:0 1px 2px rgba(18,38,63,.04),0 12px 32px -12px rgba(18,38,63,.14);
   --wrap:1180px;
@@ -41,14 +43,15 @@
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.65 var(--font-head);-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.65 var(--font-body);-webkit-font-smoothing:antialiased}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
 .wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
-h1,h2,h3{font-family:var(--font-head);color:var(--ink);font-weight:700;line-height:1.1;letter-spacing:-.025em;text-wrap:balance;margin:0}
-h2{font-size:clamp(1.95rem,3.8vw,2.85rem)}
-h3{font-size:1.18rem;letter-spacing:-.01em;line-height:1.3}
-.serif{font-family:var(--font-accent);font-weight:400;font-style:italic;letter-spacing:-.01em;color:var(--navy)}
+h1,h2,h3,.brand-name,.hero-trust b,.smiles .note b{font-variant-numeric:lining-nums}
+h1,h2,h3{font-family:var(--font-display);color:var(--ink);font-weight:600;line-height:1.05;letter-spacing:-.01em;text-wrap:balance;margin:0}
+h2{font-size:clamp(2.3rem,4.4vw,3.35rem)}
+h3{font-size:1.45rem;letter-spacing:0;line-height:1.2}
+.serif{font-family:var(--font-display);font-weight:500;font-style:italic;letter-spacing:0;color:var(--navy)}
 p{margin:0}
 .pill{display:inline-flex;align-items:center;gap:8px;width:max-content;max-width:100%;padding:7px 14px;border-radius:999px;background:var(--sky);color:var(--navy);font-size:.8rem;font-weight:700;letter-spacing:.02em}
 .pill::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cta);box-shadow:0 0 0 4px rgba(30,158,99,.18);flex:none}
@@ -76,7 +79,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(255,255,255,.82);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid rgba(226,233,241,.8)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:74px}
 .brand{display:grid;gap:2px;text-decoration:none;line-height:1.15}
-.brand-name{font-weight:800;font-size:1.12rem;color:var(--ink);letter-spacing:-.02em}
+.brand-name{font-family:var(--font-display);font-weight:700;font-size:1.4rem;color:var(--ink);letter-spacing:0;line-height:1}
 .brand-sub{font-size:.74rem;font-weight:600;color:var(--muted);letter-spacing:.02em}
 .nav{display:flex;gap:28px;font-size:.92rem;font-weight:600;color:var(--text)}
 .nav a{text-decoration:none}
@@ -87,12 +90,12 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   background:radial-gradient(900px 520px at 85% 25%,#e2effc 0%,rgba(226,239,252,0) 70%),linear-gradient(180deg,#ffffff 0%,#eef5fc 100%)}
 .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,56px);align-items:end}
 .hero-copy{display:grid;gap:var(--gap);align-content:center;padding-bottom:var(--space-section);min-width:0}
-.hero h1{font-size:clamp(2.5rem,5.2vw,4.1rem)}
-.hero h1 .serif{font-size:1.08em}
+.hero h1{font-size:clamp(2.9rem,6vw,4.8rem)}
+.hero h1 .serif{font-size:1em}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .hero-trust{display:flex;flex-wrap:wrap;gap:10px 28px;border-top:1px solid var(--line)}
 .hero-trust div{display:grid;gap:2px;padding-top:16px}
-.hero-trust b{font-size:1.45rem;color:var(--ink);letter-spacing:-.02em;line-height:1.1}
+.hero-trust b{font-family:var(--font-display);font-size:1.8rem;font-weight:600;color:var(--ink);letter-spacing:-.02em;line-height:1.1}
 .hero-trust span{font-size:.82rem;color:var(--muted)}
 .hero-visual{position:relative;align-self:end;display:grid;justify-items:center;min-width:0}
 .hero-visual .arch{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,540px);aspect-ratio:1/1.02;
@@ -136,7 +139,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .smiles figure{margin:0;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/5}
 .smiles img{width:100%;height:100%;object-fit:cover}
 .smiles .note{background:#fff;color:var(--text);box-shadow:var(--shadow);border-radius:var(--r);padding:28px;display:grid;gap:14px;align-content:end}
-.smiles .note b{color:var(--ink);font-size:1.3rem;line-height:1.25;letter-spacing:-.015em}
+.smiles .note b{font-family:var(--font-display);font-weight:600;color:var(--ink);font-size:1.65rem;line-height:1.25;letter-spacing:-.015em}
 .smiles .note p{font-size:.95rem;color:var(--text)}
 .disclaimer{margin-top:var(--gap);font-size:.8rem;color:var(--muted)}
 
@@ -268,7 +271,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
 }
 @media (max-width:560px){
   body{font-size:16px}
-  .brand-name{font-size:1rem}
+  .brand-name{font-size:1.22rem}
   .top .btn-sm span{display:none}
   .top .btn-sm{width:44px;padding:0}
   .cases{grid-template-columns:1fr}
