@@ -600,9 +600,11 @@ document.querySelectorAll('.ba input').forEach(function(r){
   once(Array.prototype.slice.call(document.querySelectorAll('.mark')), function(el){ el.classList.add('on'); }, .6);
   if(reduce) return;
   once(Array.prototype.slice.call(document.querySelectorAll('[data-count]')), function(el){
-    var end = +el.dataset.count, t0 = null;
-    function step(t){ t0 = t0 || t; var k = Math.min(1, (t - t0) / 900); el.textContent = Math.round(end * (1 - Math.pow(1 - k, 3))); if(k < 1) requestAnimationFrame(step); }
-    el.textContent = '0'; requestAnimationFrame(step);
+    /* sobe de 1 em 1, desacelerando no fim (~2,6s no total) */
+    var end = +el.dataset.count, n = 0;
+    el.textContent = '0';
+    function tick(){ n++; el.textContent = n; if(n < end) setTimeout(tick, 120 + Math.pow(n / end, 3) * 380); }
+    setTimeout(tick, 500);
   });
   once(Array.prototype.slice.call(document.querySelectorAll('.ba')), function(box){
     var input = box.querySelector('input'), touched = false, t0 = null;
