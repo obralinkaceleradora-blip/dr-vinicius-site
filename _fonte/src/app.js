@@ -65,3 +65,13 @@ document.querySelectorAll('.ba input').forEach(function(r){
     setTimeout(function(){ requestAnimationFrame(step); }, 300);
   }, .6);
 })();
+
+/* celular: barra fixa só depois que o botão da abertura sai da tela */
+(function(){
+  var cta = document.querySelector('a[data-wa="hero"]'), root = document.documentElement;
+  if(!cta || !('IntersectionObserver' in window)){ root.classList.add('show-bar'); return; }
+  new IntersectionObserver(function(es){
+    var e = es[0], passou = !e.isIntersecting && e.boundingClientRect.top < 0;
+    root.classList.toggle('show-bar', passou);
+  }).observe(cta);
+})();
