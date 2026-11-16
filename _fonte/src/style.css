@@ -137,7 +137,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 
 /* trabalhos do laboratório (dentro do diferencial) */
 .swipe-hint{display:none}
-.mist .faq details:not([open]),.mist .creds li,.mist .lab-badge{background:#fff}
+.mist .faq details:not([open]){background:#fff}
 
 /* tratamentos */
 .treat{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
@@ -166,9 +166,18 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .about-copy{display:grid;gap:18px;align-content:center;min-width:0}
 .lab-badge{display:inline-flex;align-items:center;gap:14px;background:var(--mist);border-radius:var(--r-sm);padding:12px 18px;width:max-content;max-width:100%;font-size:.85rem;color:var(--muted)}
 .lab-badge img{height:40px;width:auto}
-.creds{list-style:none;margin:4px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.creds li{display:grid;gap:4px;align-content:start;padding:14px 16px;border-radius:var(--r-sm);background:var(--mist);font-size:.94rem;color:var(--ink)}
-.creds b{font-variant-numeric:tabular-nums;color:var(--gold);font-weight:800}
+.creds-wrap{background:#fff;border-radius:var(--r);padding:22px 24px;box-shadow:var(--shadow)}
+.creds-title{font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.creds{list-style:none;margin:0;padding:0;display:grid;gap:0;position:relative}
+.creds::before{content:"";position:absolute;left:5px;top:10px;bottom:10px;width:1px;background:var(--line)}
+.creds li{position:relative;display:grid;grid-template-columns:54px 1fr;gap:12px;padding:9px 0 9px 24px;font-size:.95rem;color:var(--ink);font-weight:600;line-height:1.35}
+.creds li::before{content:"";position:absolute;left:0;top:14px;width:11px;height:11px;border-radius:50%;background:#fff;border:2px solid var(--navy)}
+.creds li:first-child::before{background:var(--navy)}
+.creds b{font-variant-numeric:tabular-nums;color:var(--navy);font-weight:800}
+.creds small{display:block;font-size:.84rem;font-weight:400;color:var(--muted);margin-top:2px}
+.about-copy .btn{justify-self:start}
+.about-photo figcaption{position:absolute;left:16px;bottom:16px;right:16px;width:max-content;max-width:calc(100% - 32px);padding:9px 14px;border-radius:12px;
+  background:rgba(255,255,255,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:.82rem;font-weight:600;color:var(--ink)}
 
 /* etapas */
 .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;counter-reset:s}
@@ -241,7 +250,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   .top .btn-sm{width:44px;padding:0}
   .cases,.treat{grid-template-columns:1fr}
   .journey{grid-template-columns:1fr}
-  .creds{grid-template-columns:1fr}
+  .about-copy .btn{justify-self:stretch}
   .journey .arrow{justify-self:center;transform:rotate(90deg)}
   .badge{font-size:.74rem;padding:8px 12px 8px 8px}
   .badge i{width:30px;height:30px}
