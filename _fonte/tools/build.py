@@ -23,6 +23,8 @@ def wa(key=''): return f"https://wa.me/{CFG['whatsapp']}?text={urllib.parse.quot
 WA = wa()
 WA_SVG = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>'
 
+SIZES = {'retrato': '(max-width: 860px) 84vw, 470px'}
+
 def render(embed):
     html = (src/'page.html').read_text()
     def img(m):
@@ -33,14 +35,31 @@ def render(embed):
         else:
             s = d['file']
         eager = rest and rest[0] == 'eager'
-        extra = ' fetchpriority="high"' if eager else ' loading="lazy"'
-        return f'<img src="{s}" alt="{alt}" width="{d["w"]}" height="{d["h"]}" decoding="async"{extra}>'
+        extra = ' fetchpriority="high"' if eager else ' loading="lazy" decoding="async"'
+        m_key = key + '-m'
+        if not embed and m_key in IMG:  # versão menor para celular
+            extra += f' srcset="{IMG[m_key]["file"]} {IMG[m_key]["w"]}w, {d["file"]} {d["w"]}w" sizes="{SIZES.get(key, "100vw")}"'
+        return f'<img src="{s}" alt="{alt}" width="{d["w"]}" height="{d["h"]}"{extra}>'
     html = re.sub(r'\{\{IMG:([^}]+)\}\}', img, html)
     html = re.sub(r'\{\{WA:(\w+)\}\}', lambda m: wa(m.group(1)).replace('&', '&amp;'), html)
     return html.replace('{{WA}}', WA.replace('&', '&amp;')).replace('{{WA_SVG}}', WA_SVG)
 
 css = (src/'style.css').read_text()
 js = (src/'app.js').read_text().replace('/*WA_LINKS*/{}', json.dumps({k: wa(k) for k in MSGS}, ensure_ascii=False))
+# fontes hospedadas no próprio site (produção); o preview usa o Google Fonts
+import hashlib, shutil
+(base/'site'/'fonts').mkdir(parents=True, exist_ok=True)
+for f in (base/'site'/'fonts').glob('*.woff2'): f.unlink()
+FONT_FILES = {}
+for name in ['jakarta', 'instrument-italic']:
+    data = (base/'raw'/'fonts'/f'{name}.woff2').read_bytes()
+    fn = f"{name}-{hashlib.md5(data).hexdigest()[:8]}.woff2"
+    (base/'site'/'fonts'/fn).write_bytes(data); FONT_FILES[name] = 'fonts/' + fn
+FONTS_LOCAL = (f'<link rel="preload" as="font" type="font/woff2" href="{FONT_FILES["jakarta"]}" crossorigin>'
+  '<style>'
+  f'@font-face{{font-family:"Plus Jakarta Sans";src:url({FONT_FILES["jakarta"]}) format("woff2");font-weight:200 800;font-style:normal;font-display:swap}}'
+  f'@font-face{{font-family:"Instrument Serif";src:url({FONT_FILES["instrument-italic"]}) format("woff2");font-weight:400;font-style:italic;font-display:swap}}'
+  '</style>')
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">'
 TITLE = 'Implantes, Próteses e Lentes em Itajaí | Dr. Vinícius Trierweiler'
 DESC = 'Recupere a confiança no seu sorriso. Implantes, próteses, lentes de contato dental e clareamento em Itajaí, SC, com dentista e técnico em prótese há 10 anos. Avaliação gratuita.'
@@ -48,7 +67,7 @@ DESC = 'Recupere a confiança no seu sorriso. Implantes, próteses, lentes de co
 schema = {
   "@context": "https://schema.org", "@type": "Dentist",
   "name": "Dr. Vinícius Trierweiler", "description": DESC, "url": CFG['dominio'],
-  "telephone": "+55 47 99971-4094", "image": CFG['dominio'] + IMG['hero']['file'],
+  "telephone": "+55 47 99971-4094", "image": CFG['dominio'] + IMG['og']['file'],
   "address": {"@type": "PostalAddress", "streetAddress": "Rua Luiz da Silva, 199", "addressLocality": "Itajaí",
               "addressRegion": "SC", "postalCode": "88311-190", "addressCountry": "BR"},
   "areaServed": "Itajaí, SC",
@@ -72,9 +91,9 @@ prod = f'''<!doctype html>
 <link rel="canonical" href="{CFG['dominio']}">
 <meta property="og:type" content="website"><meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="{TITLE}"><meta property="og:description" content="{DESC}">
-<meta property="og:image" content="{CFG['dominio']}{IMG['hero']['file']}">
-<link rel="preload" as="image" href="{IMG['hero']['file']}" fetchpriority="high">
-{FONTS}
+<meta property="og:image" content="{CFG['dominio']}{IMG['og']['file']}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<link rel="preload" as="image" href="{IMG['retrato']['file']}" imagesrcset="{IMG['retrato-m']['file']} {IMG['retrato-m']['w']}w, {IMG['retrato']['file']} {IMG['retrato']['w']}w" imagesizes="{SIZES['retrato']}" fetchpriority="high">
+{FONTS_LOCAL}
 <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script>
 {gtm_head}
 <style>{css}</style>

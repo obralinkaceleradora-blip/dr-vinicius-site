@@ -24,7 +24,7 @@
   color-scheme:light;
 }
 *,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
 body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.65 var(--font-head);-webkit-font-smoothing:antialiased}
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
@@ -41,6 +41,19 @@ section{padding-block:var(--space-section)}
 .mist{background:var(--mist)}
 .sec-head{display:grid;gap:14px;margin-bottom:var(--space-head);max-width:700px}
 .sec-head.center{margin-inline:auto;text-align:center;justify-items:center}
+
+/* marca-texto: aparece completo sem JS; com JS, se desenha quando entra na tela */
+.mark{background-image:linear-gradient(transparent 64%,rgba(120,175,232,.38) 64%,rgba(120,175,232,.38) 90%,transparent 90%);
+  background-repeat:no-repeat;background-size:100% 100%;-webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background-size 1.2s cubic-bezier(.65,0,.35,1) .25s}
+.js .mark:not(.on){background-size:0% 100%}
+
+/* entrada suave ao rolar (só desloca, nunca esconde conteúdo) */
+@keyframes rise{from{transform:translateY(26px)}to{transform:none}}
+@supports (animation-timeline: view()){
+  @media (prefers-reduced-motion:no-preference){
+    .sec-head,.cases,.smiles,.treat,.gallery,.about-photo,.about-copy,.steps,.faq,.final-card{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 30%}
+  }
+}
 
 /* botões */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 28px;border-radius:999px;
@@ -78,6 +91,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .hero-trust div{display:grid;gap:2px;padding-top:16px}
 .hero-trust b{font-size:1.45rem;color:var(--ink);letter-spacing:-.02em;line-height:1.1}
 .hero-trust span{font-size:.82rem;color:var(--muted)}
+.hero-trust b span{font-size:inherit;color:inherit}
 .hero-visual{position:relative;align-self:end;display:grid;justify-items:center;min-width:0}
 .hero-visual .arch{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,540px);aspect-ratio:1/1.02;
   border-radius:999px 999px 0 0;background:linear-gradient(170deg,#d6e8fa 0%,#b8d5f1 100%)}
@@ -217,7 +231,10 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 footer{border-top:1px solid var(--line);padding-block:24px calc(24px + 80px);font-size:.84rem;color:var(--muted)}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
 
-.float{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:40}
+.float{isolation:isolate;position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:40}
+.float .f-long{display:none}
+.float::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;box-shadow:0 0 0 0 rgba(30,158,99,.55);animation:pulse 4s ease-out infinite 2s}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(30,158,99,.5)}35%,100%{box-shadow:0 0 0 16px rgba(30,158,99,0)}}
 
 @media (max-width:1000px){
   .nav{display:none}
@@ -254,7 +271,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   body{font-size:16px}
   .brand-name{font-size:1rem}
   .top .btn-sm span{display:none}
-  .top .btn-sm{width:44px;padding:0}
+  .top .btn-sm{display:none}  /* no celular a barra fixa já faz esse papel */
   .cases{grid-template-columns:1fr}
   /* procedimentos viram carrossel no celular, como a galeria */
   .treat{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding:4px 2px 18px;margin:-4px -2px 0;scrollbar-width:none}
@@ -269,7 +286,9 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   .journey .arrow{justify-self:center;transform:rotate(90deg)}
   .badge{font-size:.74rem;padding:8px 12px 8px 8px}
   .badge i{width:30px;height:30px}
-  .float span{display:none}
-  .float{width:60px;height:60px;padding:0}
+  /* barra fixa de agendamento no celular */
+  .float{left:calc(12px + env(safe-area-inset-left,0px));right:calc(12px + env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));min-height:56px}
+  .float .f-short{display:none}
+  .float .f-long{display:inline}
 }
-@media (prefers-reduced-motion:reduce){.ticker-track{animation:none}.ticker{overflow-x:auto}html{scroll-behavior:auto}.btn,.faq summary::after{transition:none}}
+@media (prefers-reduced-motion:reduce){.float::after{animation:none}.mark{transition:none}.ticker-track{animation:none}.ticker{overflow-x:auto}html{scroll-behavior:auto}.btn,.faq summary::after{transition:none}}

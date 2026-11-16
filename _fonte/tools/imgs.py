@@ -5,7 +5,7 @@ from PIL import Image
 base = Path(__file__).resolve().parent.parent
 raw, out = base/'raw', base/'site'/'img'
 out.mkdir(parents=True, exist_ok=True)
-for f in out.glob('*.webp'): f.unlink()
+for f in list(out.glob('*.webp')) + list(out.glob('*.jpg')): f.unlink()
 def src(n): return Image.open(glob.glob(str(raw/f'img-{n}.*'))[0]).convert('RGB')
 jobs = {}
 TARJA = {'039':(170,395,560,455),'040':(170,362,560,442),'041':(170,370,520,435)}
@@ -27,6 +27,8 @@ for k,n in pick.items(): jobs[k] = src(n)
 jobs['retrato'] = Image.open(raw/'retrato-recorte.png').convert('RGBA')
 for k,f,h in [('logo-dr','logo-dr-escuro.png',96),('logo-maestria','logo-maestria.png',120)]:
     im = Image.open(raw/f).convert('RGBA'); jobs[k] = im.resize((round(im.width*h/im.height), h), Image.LANCZOS)
+jobs['retrato-m'] = jobs['retrato'].resize((440, round(jobs['retrato'].height*440/jobs['retrato'].width)), Image.LANCZOS)
+og = raw/'og.png'
 m = {}
 for k, im in jobs.items():
     if k == 'retrato': im = im.resize((780, 1040), Image.LANCZOS)
@@ -35,5 +37,9 @@ for k, im in jobs.items():
     h = hashlib.md5(tmp.read_bytes()).hexdigest()[:8]
     name = f'{k}-{h}.webp'; tmp.rename(out/name)
     m[k] = {'file': f'img/{name}', 'w': im.width, 'h': im.height}
+if og.exists():  # imagem de compartilhamento (WhatsApp/Facebook) em JPG
+    im = Image.open(og).convert('RGB'); tmp = out/'_og.jpg'; im.save(tmp, 'JPEG', quality=86, optimize=True, progressive=True)
+    h = hashlib.md5(tmp.read_bytes()).hexdigest()[:8]; tmp.rename(out/f'og-{h}.jpg')
+    m['og'] = {'file': f'img/og-{h}.jpg', 'w': im.width, 'h': im.height}
 (base/'img_map.json').write_text(json.dumps(m, indent=1))
 print(len(m), 'imagens', sum((out/v['file'][4:]).stat().st_size for v in m.values())//1024, 'KB')
