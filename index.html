@@ -340,12 +340,23 @@ var raf = 0;
 function paint(){ raf = 0; var c = current(); all('i', dots).forEach(function(d, k){ d.classList.toggle('on', k === c); }); }
 g.addEventListener('scroll', function(){ if(!raf) raf = requestAnimationFrame(paint); }, {passive:true}); paint();
 var inView = !hasIO, pausedUntil = 0;
-if(hasIO) new IntersectionObserver(function(es){ inView = es[0].isIntersecting; }, {threshold:.6}).observe(g);
+if(hasIO) new IntersectionObserver(function(es){ inView = es[0].isIntersecting; }, {threshold:.35}).observe(g);
 ['pointerdown','touchstart','wheel','keydown'].forEach(function(ev){ g.addEventListener(ev, function(){ pausedUntil = Date.now() + 6000; }, {passive:true}); });
+function glide(to){
+var from = g.scrollLeft, t0 = null, dur = 650;
+if(Math.abs(to - from) < 2) return;
+g.style.scrollSnapType = 'none';
+function step(t){
+t0 = t0 || t; var k = Math.min(1, (t - t0) / dur), e = k < .5 ? 4*k*k*k : 1 - Math.pow(-2*k + 2, 3) / 2;
+g.scrollLeft = from + (to - from) * e;
+if(k < 1 && Date.now() >= pausedUntil) requestAnimationFrame(step); else g.style.scrollSnapType = '';
+}
+requestAnimationFrame(step);
+}
 setInterval(function(){
 if(!phone.matches || reduce.matches || !inView || doc.hidden || Date.now() < pausedUntil) return;
 var list = shown(), c = current(), atEnd = c >= list.length - 1;
-g.scrollTo({left: atEnd ? 0 : list[c + 1].offsetLeft - list[0].offsetLeft, behavior:'smooth'});
+glide(atEnd ? 0 : list[c + 1].offsetLeft - list[0].offsetLeft);
 }, 2800);
 })();
 })();</script>
