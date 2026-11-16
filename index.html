@@ -191,8 +191,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .t-ph svg{width:72px;height:72px;opacity:.75}
 
 /* galeria */
-.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
 .gallery img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:var(--r-sm);background:#0b0f15}
+.gallery img:nth-child(1),.gallery img:nth-child(6){grid-row:span 2;aspect-ratio:auto;height:100%}
 
 /* sobre */
 .about .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(32px,5vw,72px);align-items:stretch}
@@ -280,6 +281,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
     -webkit-overflow-scrolling:touch;scrollbar-width:none}
   .gallery::-webkit-scrollbar{display:none}
   /* largura explícita: o Safari ignora flex-basis em imagem com width:100% */
+  #diferencial .gallery .desk-only{display:none}
   #diferencial .gallery img{flex:none;width:100%;max-width:100%;aspect-ratio:1;height:auto;scroll-snap-align:start;scroll-snap-stop:always}
   .dots{display:flex;justify-content:center;gap:8px;margin-top:14px}
   .dots i{width:7px;height:7px;border-radius:99px;background:var(--line);transition:width .3s,background .3s}
@@ -451,12 +453,16 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
       <p class="swipe-hint" aria-hidden="true">Arraste para o lado para ver mais</p>
     </div>
     <div class="gallery" tabindex="0" aria-label="Galeria de trabalhos do laboratório">
-      <img src="img/hero-128b0195.webp" alt="Prótese total superior e inferior com gengiva caracterizada" width="576" height="768" loading="lazy" decoding="async">
+      <img src="img/g3-563bcf2c.webp" alt="Prótese total vista de lado" width="615" height="768" class="desk-only" loading="lazy" decoding="async">
       <img src="img/g1-2eb2db5d.webp" alt="Protocolo superior sobre o modelo de gesso" width="576" height="768" loading="lazy" decoding="async">
-      <img src="img/g7-bb93fe45.webp" alt="Prótese montada no articulador" width="576" height="768" loading="lazy" decoding="async">
       <img src="img/g2-f0a016b7.webp" alt="Prótese inferior com gengiva caracterizada" width="576" height="768" loading="lazy" decoding="async">
       <img src="img/g8-d4eab5b3.webp" alt="Protocolos prontos para entrega" width="576" height="768" loading="lazy" decoding="async">
+      <img src="img/g7-bb93fe45.webp" alt="Prótese montada no articulador" width="576" height="768" loading="lazy" decoding="async">
+      <img src="img/hero-128b0195.webp" alt="Prótese total superior e inferior com gengiva caracterizada" width="576" height="768" loading="lazy" decoding="async">
       <img src="img/g11-c2b4405c.webp" alt="Prótese superior vista por dentro" width="576" height="768" loading="lazy" decoding="async">
+      <img src="img/g4-2949fccf.webp" alt="Prótese total superior e inferior vista de frente" width="615" height="768" class="desk-only" loading="lazy" decoding="async">
+      <img src="img/g5-bf757400.webp" alt="Prótese total sobre a base de gesso" width="576" height="768" class="desk-only" loading="lazy" decoding="async">
+      <img src="img/g12-c0b65573.webp" alt="Prótese total com gengiva caracterizada" width="576" height="768" class="desk-only" loading="lazy" decoding="async">
     </div>
   </div>
 </section>
@@ -631,7 +637,7 @@ document.querySelectorAll('.ba input').forEach(function(r){
   if(!g || !window.matchMedia) return;
   var mobile = matchMedia('(max-width: 860px)'), reduce = matchMedia('(prefers-reduced-motion: reduce)');
   var timer = null, visible = false, pausedUntil = 0, DELAY = 2800;
-  function items(){ return Array.prototype.slice.call(g.children); }
+  function items(){ return Array.prototype.slice.call(g.children).filter(function(el){ return el.offsetParent !== null || getComputedStyle(el).display !== 'none'; }); }
   function next(){
     if(!mobile.matches || reduce.matches || !visible || Date.now() < pausedUntil || document.hidden) return;
     var list = items(), base = list[0].offsetLeft, cur = 0;
@@ -643,7 +649,7 @@ document.querySelectorAll('.ba input').forEach(function(r){
   function pause(){ pausedUntil = Date.now() + 6000; }
   /* indicador de posição (bolinhas) */
   var dots = document.createElement('div'); dots.className = 'dots'; dots.setAttribute('aria-hidden','true');
-  items().forEach(function(){ dots.appendChild(document.createElement('i')); });
+  Array.prototype.slice.call(g.querySelectorAll('img:not(.desk-only)')).forEach(function(){ dots.appendChild(document.createElement('i')); });
   g.parentNode.insertBefore(dots, g.nextSibling);
   function mark(){ var i = Math.round(g.scrollLeft / Math.max(1, g.clientWidth)); Array.prototype.forEach.call(dots.children, function(d, k){ d.classList.toggle('on', k === i); }); }
   g.addEventListener('scroll', function(){ requestAnimationFrame(mark); }, {passive:true}); mark();

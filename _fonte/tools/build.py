@@ -34,12 +34,13 @@ def render(embed):
             s = 'data:image/webp;base64,' + base64.b64encode((base/'site'/d['file']).read_bytes()).decode()
         else:
             s = d['file']
-        eager = rest and rest[0] == 'eager'
+        eager = 'eager' in rest
         extra = ' fetchpriority="high"' if eager else ' loading="lazy" decoding="async"'
         m_key = key + '-m'
         if not embed and m_key in IMG:  # versão menor para celular
             extra += f' srcset="{IMG[m_key]["file"]} {IMG[m_key]["w"]}w, {d["file"]} {d["w"]}w" sizes="{SIZES.get(key, "100vw")}"'
-        return f'<img src="{s}" alt="{alt}" width="{d["w"]}" height="{d["h"]}"{extra}>'
+        cls = ''.join(f' class="{r[2:]}"' for r in rest if r.startswith('c:'))
+        return f'<img src="{s}" alt="{alt}" width="{d["w"]}" height="{d["h"]}"{cls}{extra}>'
     html = re.sub(r'\{\{IMG:([^}]+)\}\}', img, html)
     html = re.sub(r'\{\{WA:(\w+)\}\}', lambda m: wa(m.group(1)).replace('&', '&amp;'), html)
     return html.replace('{{WA}}', WA.replace('&', '&amp;')).replace('{{WA_SVG}}', WA_SVG)

@@ -175,8 +175,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .t-ph svg{width:72px;height:72px;opacity:.75}
 
 /* galeria */
-.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
 .gallery img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:var(--r-sm);background:#0b0f15}
+.gallery img:nth-child(1),.gallery img:nth-child(6){grid-row:span 2;aspect-ratio:auto;height:100%}
 
 /* sobre */
 .about .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(32px,5vw,72px);align-items:stretch}
@@ -264,6 +265,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
     -webkit-overflow-scrolling:touch;scrollbar-width:none}
   .gallery::-webkit-scrollbar{display:none}
   /* largura explícita: o Safari ignora flex-basis em imagem com width:100% */
+  #diferencial .gallery .desk-only{display:none}
   #diferencial .gallery img{flex:none;width:100%;max-width:100%;aspect-ratio:1;height:auto;scroll-snap-align:start;scroll-snap-stop:always}
   .dots{display:flex;justify-content:center;gap:8px;margin-top:14px}
   .dots i{width:7px;height:7px;border-radius:99px;background:var(--line);transition:width .3s,background .3s}
