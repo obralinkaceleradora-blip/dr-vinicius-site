@@ -41,7 +41,7 @@ def render(embed):
 
 css = (src/'style.css').read_text()
 js = (src/'app.js').read_text().replace('/*WA_LINKS*/{}', json.dumps({k: wa(k) for k in MSGS}, ensure_ascii=False))
-FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Jost:wght@400;500;600;700&display=swap">'
+FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">'
 TITLE = 'Implantes, Próteses e Lentes em Itajaí | Dr. Vinícius Trierweiler'
 DESC = 'Recupere a confiança no seu sorriso. Implantes, próteses, lentes de contato dental e clareamento em Itajaí, SC, com dentista e técnico em prótese há 10 anos. Avaliação gratuita.'
 
