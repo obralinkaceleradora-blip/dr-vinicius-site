@@ -30,7 +30,7 @@ def render(embed):
 
 css = (src/'style.css').read_text()
 js = (src/'app.js').read_text()
-FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;600;700&display=swap">'
+FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap">'
 TITLE = 'Prótese Dentária e Protocolo em Itajaí | Dr. Vinícius Trierweiler'
 DESC = 'Dentista e técnico em prótese há 8 anos, com laboratório próprio. Prótese total, protocolo sobre implantes e prótese parcial em Itajaí, SC. Avaliação gratuita.'
 
@@ -57,7 +57,7 @@ prod = f'''<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{TITLE}</title>
 <meta name="description" content="{DESC}">
-<meta name="theme-color" content="#132a43">
+<meta name="theme-color" content="#ffffff">
 <link rel="canonical" href="{CFG['dominio']}">
 <meta property="og:type" content="website"><meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="{TITLE}"><meta property="og:description" content="{DESC}">

@@ -24,12 +24,12 @@ jobs['vinicius'] = src('001')
 pick = {'hero':'084','protocolo':'063','total':'085','ppr':'129','placa':'140',
  'g1':'061','g2':'073','g3':'193','g4':'195','g5':'302','g6':'182','g7':'279','g8':'301','g9':'074','g10':'162','g11':'173','g12':'083'}
 for k,n in pick.items(): jobs[k] = src(n)
-jobs['retrato'] = Image.open(raw/'retrato.jpg').convert('RGB')
-for k,f,h in [('logo-dr','logo-dr-branco.png',96),('logo-maestria','logo-maestria.png',120)]:
+jobs['retrato'] = Image.open(raw/'retrato-recorte.png').convert('RGBA')
+for k,f,h in [('logo-dr','logo-dr-escuro.png',96),('logo-maestria','logo-maestria.png',120)]:
     im = Image.open(raw/f).convert('RGBA'); jobs[k] = im.resize((round(im.width*h/im.height), h), Image.LANCZOS)
 m = {}
 for k, im in jobs.items():
-    if k == 'retrato': im = im.resize((720, 960), Image.LANCZOS)
+    if k == 'retrato': im = im.resize((780, 1040), Image.LANCZOS)
     elif im.width > 900 and not k.startswith('logo'): im = im.resize((900, round(im.height*900/im.width)), Image.LANCZOS)
     tmp = out/'_tmp.webp'; im.save(tmp, 'WEBP', quality=80, method=6)
     h = hashlib.md5(tmp.read_bytes()).hexdigest()[:8]
