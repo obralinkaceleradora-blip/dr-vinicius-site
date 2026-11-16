@@ -27,13 +27,14 @@ for k,n in pick.items(): jobs[k] = src(n)
 jobs['retrato'] = Image.open(raw/'retrato-recorte.png').convert('RGBA')
 for k,f,h in [('logo-dr','logo-dr-escuro.png',96),('logo-maestria','logo-maestria.png',120)]:
     im = Image.open(raw/f).convert('RGBA'); jobs[k] = im.resize((round(im.width*h/im.height), h), Image.LANCZOS)
-jobs['retrato-m'] = jobs['retrato'].resize((440, round(jobs['retrato'].height*440/jobs['retrato'].width)), Image.LANCZOS)
+jobs['retrato-m'] = jobs['retrato'].resize((520, round(jobs['retrato'].height*520/jobs['retrato'].width)), Image.LANCZOS)
 og = raw/'og.png'
 m = {}
 for k, im in jobs.items():
     if k == 'retrato': im = im.resize((780, 1040), Image.LANCZOS)
-    elif im.width > 900 and not k.startswith('logo'): im = im.resize((900, round(im.height*900/im.width)), Image.LANCZOS)
-    tmp = out/'_tmp.webp'; im.save(tmp, 'WEBP', quality=80, method=6)
+    elif im.width > 640 and not k.startswith(('logo', 'retrato')):  # nenhuma foto aparece maior que ~400px na página
+        im = im.resize((640, round(im.height*640/im.width)), Image.LANCZOS)
+    tmp = out/'_tmp.webp'; im.save(tmp, 'WEBP', quality=78, method=6)
     h = hashlib.md5(tmp.read_bytes()).hexdigest()[:8]
     name = f'{k}-{h}.webp'; tmp.rename(out/name)
     m[k] = {'file': f'img/{name}', 'w': im.width, 'h': im.height}
