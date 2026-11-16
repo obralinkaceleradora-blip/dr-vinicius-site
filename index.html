@@ -33,6 +33,10 @@
   --r-lg:28px;--r:20px;--r-sm:14px;
   --shadow:0 1px 2px rgba(18,38,63,.04),0 12px 32px -12px rgba(18,38,63,.14);
   --wrap:1180px;
+  /* ritmo vertical: um só valor para todas as seções, um para cabeçalho→conteúdo, um para grades */
+  --space-section:clamp(56px,7vw,96px);
+  --space-head:clamp(28px,3.5vw,44px);
+  --gap:clamp(14px,1.8vw,22px);
   color-scheme:light;
 }
 *,*::before,*::after{box-sizing:border-box}
@@ -49,9 +53,9 @@ p{margin:0}
 .pill{display:inline-flex;align-items:center;gap:8px;width:max-content;max-width:100%;padding:7px 14px;border-radius:999px;background:var(--sky);color:var(--navy);font-size:.8rem;font-weight:700;letter-spacing:.02em}
 .pill::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cta);box-shadow:0 0 0 4px rgba(30,158,99,.18);flex:none}
 .lead{font-size:1.1rem;max-width:58ch}
-section{padding-block:clamp(72px,9vw,120px)}
+section{padding-block:var(--space-section)}
 .mist{background:var(--mist)}
-.sec-head{display:grid;gap:16px;margin-bottom:clamp(36px,5vw,56px);max-width:700px}
+.sec-head{display:grid;gap:14px;margin-bottom:var(--space-head);max-width:700px}
 .sec-head.center{margin-inline:auto;text-align:center;justify-items:center}
 
 /* botões */
@@ -82,7 +86,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .hero{position:relative;overflow:hidden;padding-block:clamp(32px,5vw,56px) 0;border-bottom:1px solid var(--line);
   background:radial-gradient(900px 520px at 85% 25%,#e2effc 0%,rgba(226,239,252,0) 70%),linear-gradient(180deg,#ffffff 0%,#eef5fc 100%)}
 .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,56px);align-items:end}
-.hero-copy{display:grid;gap:24px;align-content:center;padding-bottom:clamp(48px,7vw,96px);min-width:0}
+.hero-copy{display:grid;gap:var(--gap);align-content:center;padding-bottom:var(--space-section);min-width:0}
 .hero h1{font-size:clamp(2.5rem,5.2vw,4.1rem)}
 .hero h1 .serif{font-size:1.08em}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
@@ -115,7 +119,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @keyframes ticker{to{transform:translateX(-50%)}}
 
 /* resultados */
-.cases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.cases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap)}
 .case{background:#fff;border-radius:var(--r);padding:10px;box-shadow:var(--shadow);display:grid;gap:12px;align-content:start}
 .case p{font-size:.92rem;color:var(--muted);padding:0 8px 8px}
 .ba{position:relative;border-radius:var(--r-sm);overflow:hidden;aspect-ratio:1;background:var(--mist);touch-action:pan-y;--pos:50%}
@@ -128,16 +132,16 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   box-shadow:0 4px 14px rgba(0,0,0,.25)}
 .tag{position:absolute;top:10px;z-index:2;background:rgba(18,38,63,.78);color:#fff;font:700 .68rem/1 var(--font-head);letter-spacing:.1em;text-transform:uppercase;padding:7px 10px;border-radius:999px;pointer-events:none}
 .tag.l{left:10px}.tag.r{right:10px;background:var(--cta)}
-.smiles{display:grid;grid-template-columns:1fr 1fr 1.1fr;gap:22px;margin-top:22px}
+.smiles{display:grid;grid-template-columns:1fr 1fr 1.1fr;gap:var(--gap);margin-top:var(--gap)}
 .smiles figure{margin:0;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/5}
 .smiles img{width:100%;height:100%;object-fit:cover}
 .smiles .note{background:#fff;color:var(--text);box-shadow:var(--shadow);border-radius:var(--r);padding:28px;display:grid;gap:14px;align-content:end}
 .smiles .note b{color:var(--ink);font-size:1.3rem;line-height:1.25;letter-spacing:-.015em}
 .smiles .note p{font-size:.95rem;color:var(--text)}
-.disclaimer{margin-top:18px;font-size:.8rem;color:var(--muted)}
+.disclaimer{margin-top:var(--gap);font-size:.8rem;color:var(--muted)}
 
 /* diferencial */
-.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap)}
 .pillar{background:var(--mist);border-radius:var(--r);padding:30px;display:grid;gap:12px;align-content:start}
 .pillar i{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:#fff;color:var(--navy);box-shadow:var(--shadow);margin-bottom:6px}
 .pillar i svg{width:22px;height:22px}
@@ -156,7 +160,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .mist .faq details:not([open]){background:#fff}
 
 /* tratamentos */
-.treat{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+.treat{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--gap)}
 .t-card{background:#fff;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);display:grid;grid-template-rows:auto 1fr}
 .t-card img{width:100%;aspect-ratio:4/3.4;object-fit:cover;background:#0b0f15}
 .t-card > div{padding:22px;display:flex;flex-direction:column;gap:8px}
@@ -196,13 +200,14 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   background:rgba(255,255,255,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:.82rem;font-weight:600;color:var(--ink)}
 
 /* etapas */
-.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;counter-reset:s}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap);counter-reset:s}
 .step{background:#fff;border-radius:var(--r);padding:30px;box-shadow:var(--shadow);display:grid;gap:10px;align-content:start}
 .step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--sky);color:var(--navy);font-weight:800;margin-bottom:8px}
 .step p{color:var(--muted)}
 
 /* faq */
-.faq-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(32px,5vw,72px);align-items:start}
+.faq-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(28px,5vw,72px);align-items:start}
+.faq-wrap .sec-head{margin-bottom:0}
 .faq{display:grid;gap:12px}
 .faq details{background:var(--mist);border-radius:var(--r-sm);padding:0 24px;transition:background .2s}
 .faq details[open]{background:#fff;box-shadow:var(--shadow)}
@@ -213,18 +218,19 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .faq details p{padding:0 0 22px;color:var(--text)}
 
 /* chamada final */
+#contato{padding-bottom:clamp(40px,5vw,72px)}
 .final-card{position:relative;overflow:hidden;border-radius:clamp(24px,3vw,36px);padding:clamp(28px,5vw,64px);
   background:radial-gradient(600px 320px at 90% 0%,#cfe4fa 0%,rgba(207,228,250,0) 70%),linear-gradient(150deg,#e6f1fc 0%,#d5e7f9 100%);
   color:var(--text);display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,4vw,56px);align-items:center}
 .final-card h2{color:var(--ink)}
-.final-copy{display:grid;gap:22px;min-width:0}
+.final-copy{display:grid;gap:var(--gap);min-width:0}
 .place{background:#fff;color:var(--text);border-radius:var(--r);padding:26px;box-shadow:var(--shadow);display:grid;gap:14px}
 .place h3{font-size:.8rem;color:var(--muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
 .place address{font-style:normal;font-size:1.08rem;line-height:1.55;color:var(--ink);font-weight:600}
 .place .row{display:flex;flex-wrap:wrap;gap:10px}
 .phone{font-variant-numeric:tabular-nums;font-weight:700;color:var(--ink);user-select:all}
 
-footer{padding-block:28px calc(28px + 80px);font-size:.84rem;color:var(--muted)}
+footer{border-top:1px solid var(--line);padding-block:24px calc(24px + 80px);font-size:.84rem;color:var(--muted)}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
 
 .float{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:40}
@@ -240,6 +246,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
 @media (max-width:860px){
   .hero .wrap,.about .wrap,.final-card,.faq-wrap{grid-template-columns:1fr}
   .hero-copy{padding-bottom:0}
+  .hero-visual{margin-top:clamp(8px,3vw,24px)}
   .hero-visual{margin-top:8px}
   .hero-visual img{width:min(84%,380px)}
   .badge.b1{top:22%}
@@ -264,7 +271,15 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   .brand-name{font-size:1rem}
   .top .btn-sm span{display:none}
   .top .btn-sm{width:44px;padding:0}
-  .cases,.treat{grid-template-columns:1fr}
+  .cases{grid-template-columns:1fr}
+  /* procedimentos viram carrossel no celular, como a galeria */
+  .treat{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding:4px 2px 18px;margin:-4px -2px 0;scrollbar-width:none}
+  .treat::-webkit-scrollbar{display:none}
+  .t-card{flex:0 0 80%;scroll-snap-align:start}
+  .t-card img,.t-ph{aspect-ratio:16/11}
+  /* etapas compactas: número ao lado do texto */
+  .step{grid-template-columns:44px 1fr;column-gap:16px;row-gap:4px;padding:20px}
+  .step::before{grid-row:span 2;margin:0}
   .journey{grid-template-columns:1fr}
   .about-copy .btn{justify-self:stretch}
   .journey .arrow{justify-self:center;transform:rotate(90deg)}
@@ -387,6 +402,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
       <article class="t-card" data-servico="lentes"><div class="t-ph" role="img" aria-label="Lentes de contato dental"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 6c1.6 8.4 4.6 11.4 13 13-8.4 1.6-11.4 4.6-13 13-1.6-8.4-4.6-11.4-13-13 8.4-1.6 11.4-4.6 13-13Z"/><path d="M38 30c.7 3.4 1.8 4.6 5 5.2-3.2.6-4.3 1.8-5 5.2-.7-3.4-1.8-4.6-5-5.2 3.2-.6 4.3-1.8 5-5.2Z"/></svg></div><div><h3>Lentes de contato dental</h3><p>Incomodado com a cor, o formato ou o tamanho dos dentes? As lentes harmonizam o sorriso com naturalidade.</p><a class="t-link" href="https://wa.me/5547999714094?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o%20gratuita%20para%20lentes%20de%20contato%20dental." target="_blank" rel="noopener" data-wa="card-lentes">Agendar avaliação<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></article>
       <article class="t-card" data-servico="clareamento"><div class="t-ph" role="img" aria-label="Clareamento dental"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="24" cy="24" r="8"/><path d="M24 6v5M24 37v5M6 24h5M37 24h5M11.3 11.3l3.5 3.5M33.2 33.2l3.5 3.5M11.3 36.7l3.5-3.5M33.2 14.8l3.5-3.5"/></svg></div><div><h3>Clareamento dental</h3><p>Dentes amarelados ou manchados? O clareamento deixa os dentes mais claros, com acompanhamento profissional.</p><a class="t-link" href="https://wa.me/5547999714094?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o%20gratuita%20para%20clareamento." target="_blank" rel="noopener" data-wa="card-clareamento">Agendar avaliação<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></article>
     </div>
+    <p class="swipe-hint" aria-hidden="true">Arraste para o lado para ver mais</p>
   </div>
 </section>
 
