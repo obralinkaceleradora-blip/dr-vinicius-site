@@ -86,6 +86,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .badge i svg{width:18px;height:18px}
 .badge.b1{left:0;top:32%}
 .badge.b2{right:0;bottom:14%}
+.badge.b3{left:2%;bottom:4%}
 
 /* resultados */
 .cases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
@@ -106,7 +107,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .smiles img{width:100%;height:100%;object-fit:cover}
 .smiles .note{background:#fff;color:var(--text);box-shadow:var(--shadow);border-radius:var(--r);padding:28px;display:grid;gap:14px;align-content:end}
 .smiles .note b{color:var(--ink);font-size:1.3rem;line-height:1.25;letter-spacing:-.015em}
-.smiles .note p{font-size:.88rem;color:var(--muted)}
+.smiles .note p{font-size:.95rem;color:var(--text)}
+.disclaimer{margin-top:18px;font-size:.8rem;color:var(--muted)}
 
 /* diferencial */
 .pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
@@ -203,6 +205,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   .hero-visual img{width:min(84%,380px)}
   .badge.b1{top:22%}
   .badge.b2{bottom:10%}
+  .badge.b3{left:0;bottom:auto;top:44%}
   .pillars,.steps{grid-template-columns:1fr}
   .about-photo{aspect-ratio:5/4}
   .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
