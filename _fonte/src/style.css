@@ -173,9 +173,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .t-ph svg{width:72px;height:72px;opacity:.75}
 
 /* galeria */
-.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .gallery img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:var(--r-sm);background:#0b0f15}
-.gallery img:nth-child(1),.gallery img:nth-child(6){grid-row:span 2;aspect-ratio:auto;height:100%}
 
 /* sobre */
 .about .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(32px,5vw,72px);align-items:stretch}
@@ -262,9 +261,9 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   .gallery{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:2px;padding-bottom:6px;
     -webkit-overflow-scrolling:touch;scrollbar-width:none}
   .gallery::-webkit-scrollbar{display:none}
-  .gallery img{flex:0 0 72%;aspect-ratio:4/5;height:auto;scroll-snap-align:start}
-  .gallery img:nth-child(1),.gallery img:nth-child(6){grid-row:auto;aspect-ratio:4/5;height:auto}
-  .swipe-hint{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:.82rem;color:var(--muted)}
+  /* largura explícita: o Safari ignora flex-basis em imagem com width:100% */
+  .gallery img{flex:none;width:60%;max-width:60%;aspect-ratio:1;height:auto;scroll-snap-align:start}
+  .swipe-hint{display:flex;align-items:center;gap:8px;margin-top:-4px;font-size:.82rem;font-weight:600;color:var(--navy)}
   .swipe-hint::before{content:"";width:28px;height:2px;border-radius:2px;background:var(--navy);opacity:.4}
 }
 @media (max-width:560px){
@@ -278,7 +277,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   /* procedimentos viram carrossel no celular, como a galeria */
   .treat{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding:4px 2px 18px;margin:-4px -2px 0;scrollbar-width:none}
   .treat::-webkit-scrollbar{display:none}
-  .t-card{flex:0 0 80%;scroll-snap-align:start}
+  .t-card{flex:none;width:80%;max-width:80%;scroll-snap-align:start}
   .t-card img,.t-ph{aspect-ratio:16/11}
   /* etapas compactas: número ao lado do texto */
   .step{grid-template-columns:44px 1fr;column-gap:16px;row-gap:4px;padding:20px}

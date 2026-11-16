@@ -189,9 +189,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .t-ph svg{width:72px;height:72px;opacity:.75}
 
 /* galeria */
-.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .gallery img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:var(--r-sm);background:#0b0f15}
-.gallery img:nth-child(1),.gallery img:nth-child(6){grid-row:span 2;aspect-ratio:auto;height:100%}
 
 /* sobre */
 .about .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(32px,5vw,72px);align-items:stretch}
@@ -278,9 +277,9 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   .gallery{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:2px;padding-bottom:6px;
     -webkit-overflow-scrolling:touch;scrollbar-width:none}
   .gallery::-webkit-scrollbar{display:none}
-  .gallery img{flex:0 0 72%;aspect-ratio:4/5;height:auto;scroll-snap-align:start}
-  .gallery img:nth-child(1),.gallery img:nth-child(6){grid-row:auto;aspect-ratio:4/5;height:auto}
-  .swipe-hint{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:.82rem;color:var(--muted)}
+  /* largura explícita: o Safari ignora flex-basis em imagem com width:100% */
+  .gallery img{flex:none;width:60%;max-width:60%;aspect-ratio:1;height:auto;scroll-snap-align:start}
+  .swipe-hint{display:flex;align-items:center;gap:8px;margin-top:-4px;font-size:.82rem;font-weight:600;color:var(--navy)}
   .swipe-hint::before{content:"";width:28px;height:2px;border-radius:2px;background:var(--navy);opacity:.4}
 }
 @media (max-width:560px){
@@ -294,7 +293,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   /* procedimentos viram carrossel no celular, como a galeria */
   .treat{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding:4px 2px 18px;margin:-4px -2px 0;scrollbar-width:none}
   .treat::-webkit-scrollbar{display:none}
-  .t-card{flex:0 0 80%;scroll-snap-align:start}
+  .t-card{flex:none;width:80%;max-width:80%;scroll-snap-align:start}
   .t-card img,.t-ph{aspect-ratio:16/11}
   /* etapas compactas: número ao lado do texto */
   .step{grid-template-columns:44px 1fr;column-gap:16px;row-gap:4px;padding:20px}
@@ -427,6 +426,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
       <span class="pill">Procedimentos</span>
       <h2>Implantes, próteses e <span class="serif">estética do sorriso</span></h2>
       <p class="lead">Os tratamentos realizados pelo Dr. Vinícius. Na avaliação gratuita, ele examina o seu caso e indica o mais adequado para você.</p>
+      <p class="swipe-hint" aria-hidden="true">Arraste para o lado para ver mais</p>
     </div>
     <div class="treat">
       <article class="t-card" data-servico="implante"><img src="img/g1-2eb2db5d.webp" alt="Prótese fixa sobre o modelo, com os pontos de encaixe dos implantes" width="576" height="768" loading="lazy" decoding="async"><div><h3>Implantes dentários</h3><p>Perdeu um ou mais dentes e evita mastigar ou sorrir? O implante devolve um dente fixo, firme e com aparência natural.</p><a class="t-link" href="https://wa.me/5547999714094?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o%20gratuita%20para%20implante." target="_blank" rel="noopener" data-wa="card-implante">Agendar avaliação<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></article>
@@ -434,7 +434,6 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
       <article class="t-card" data-servico="lentes"><div class="t-ph" role="img" aria-label="Lentes de contato dental"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 6c1.6 8.4 4.6 11.4 13 13-8.4 1.6-11.4 4.6-13 13-1.6-8.4-4.6-11.4-13-13 8.4-1.6 11.4-4.6 13-13Z"/><path d="M38 30c.7 3.4 1.8 4.6 5 5.2-3.2.6-4.3 1.8-5 5.2-.7-3.4-1.8-4.6-5-5.2 3.2-.6 4.3-1.8 5-5.2Z"/></svg></div><div><h3>Lentes de contato dental</h3><p>Incomodado com a cor, o formato ou o tamanho dos dentes? As lentes harmonizam o sorriso com naturalidade.</p><a class="t-link" href="https://wa.me/5547999714094?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o%20gratuita%20para%20lentes%20de%20contato%20dental." target="_blank" rel="noopener" data-wa="card-lentes">Agendar avaliação<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></article>
       <article class="t-card" data-servico="clareamento"><div class="t-ph" role="img" aria-label="Clareamento dental"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="24" cy="24" r="8"/><path d="M24 6v5M24 37v5M6 24h5M37 24h5M11.3 11.3l3.5 3.5M33.2 33.2l3.5 3.5M11.3 36.7l3.5-3.5M33.2 14.8l3.5-3.5"/></svg></div><div><h3>Clareamento dental</h3><p>Dentes amarelados ou manchados? O clareamento deixa os dentes mais claros, com acompanhamento profissional.</p><a class="t-link" href="https://wa.me/5547999714094?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o%20gratuita%20para%20clareamento." target="_blank" rel="noopener" data-wa="card-clareamento">Agendar avaliação<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></article>
     </div>
-    <p class="swipe-hint" aria-hidden="true">Arraste para o lado para ver mais</p>
   </div>
 </section>
 
@@ -442,22 +441,18 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   <div class="wrap">
     <div class="sec-head">
       <span class="pill">Por que o Dr. Vinícius</span>
-      <h2>O olhar de quem fabrica dentes <span class="serif">em cada detalhe</span></h2>
-      <p class="lead">10 anos fabricando dentes no laboratório. Por isso ele planeja cada sorriso pensando em cor, formato e naturalidade. Veja alguns trabalhos feitos por ele.</p>
+      <h2>O detalhe de quem <span class="serif">fabrica dentes</span></h2>
+      <p class="lead">Trabalhos feitos por ele no laboratório próprio.</p>
+      <p class="swipe-hint" aria-hidden="true">Arraste para o lado para ver mais</p>
     </div>
     <div class="gallery" tabindex="0" aria-label="Galeria de trabalhos do laboratório">
-      <img src="img/g3-563bcf2c.webp" alt="Prótese total vista de lado" width="615" height="768" loading="lazy" decoding="async">
+      <img src="img/hero-128b0195.webp" alt="Prótese total superior e inferior com gengiva caracterizada" width="576" height="768" loading="lazy" decoding="async">
       <img src="img/g1-2eb2db5d.webp" alt="Protocolo superior sobre o modelo de gesso" width="576" height="768" loading="lazy" decoding="async">
+      <img src="img/g7-bb93fe45.webp" alt="Prótese montada no articulador" width="576" height="768" loading="lazy" decoding="async">
       <img src="img/g2-f0a016b7.webp" alt="Prótese inferior com gengiva caracterizada" width="576" height="768" loading="lazy" decoding="async">
       <img src="img/g8-d4eab5b3.webp" alt="Protocolos prontos para entrega" width="576" height="768" loading="lazy" decoding="async">
-      <img src="img/g7-bb93fe45.webp" alt="Prótese montada no articulador" width="576" height="768" loading="lazy" decoding="async">
-      <img src="img/hero-128b0195.webp" alt="Prótese total superior e inferior com gengiva caracterizada" width="576" height="768" loading="lazy" decoding="async">
       <img src="img/g11-c2b4405c.webp" alt="Prótese superior vista por dentro" width="576" height="768" loading="lazy" decoding="async">
-      <img src="img/g4-2949fccf.webp" alt="Prótese total superior e inferior vista de frente" width="615" height="768" loading="lazy" decoding="async">
-      <img src="img/g5-bf757400.webp" alt="Prótese total sobre a base de gesso" width="576" height="768" loading="lazy" decoding="async">
-      <img src="img/g12-c0b65573.webp" alt="Prótese total com gengiva caracterizada" width="576" height="768" loading="lazy" decoding="async">
     </div>
-    <p class="swipe-hint" aria-hidden="true">Arraste para o lado para ver mais</p>
   </div>
 </section>
 
