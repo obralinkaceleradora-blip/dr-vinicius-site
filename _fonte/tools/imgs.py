@@ -29,6 +29,7 @@ for k,f,h in [('logo-dr','logo-dr-escuro.png',96),('logo-maestria','logo-maestri
     im = Image.open(raw/f).convert('RGBA'); jobs[k] = im.resize((round(im.width*h/im.height), h), Image.LANCZOS)
 jobs['lentes'] = Image.open(raw/'capa-lentes.jpg').convert('RGB')  # capa do card de lentes
 jobs['protese-capa'] = Image.open(raw/'capa-protese.jpg').convert('RGB').crop((85, 242, 1045, 1058))  # capa do card de próteses
+jobs['clareamento'] = Image.open(raw/'capa-clareamento.png').convert('RGB').crop((250, 190, 1230, 1023))  # capa do card de clareamento
 jobs['retrato-m'] = jobs['retrato'].resize((520, round(jobs['retrato'].height*520/jobs['retrato'].width)), Image.LANCZOS)
 og = raw/'og.png'
 m = {}
