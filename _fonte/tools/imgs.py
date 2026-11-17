@@ -36,6 +36,7 @@ LAB = {1:(100,480,780,1160),2:(50,650,810,1410),3:(115,440,815,1140),4:(130,320,
 for i, box in LAB.items():
     jobs[f'lab{i}'] = Image.open(raw/'lab'/f'lab{i}.jpg').convert('RGB').crop(box)
 jobs['fachada'] = Image.open(raw/'fachada.jpg').convert('RGB').crop((450, 340, 2350, 2240))  # placa do consultório
+jobs['consultorio'] = Image.open(raw/'consultorio.jpg').convert('RGB').crop((0, 541, 1449, 2357))  # sala de atendimento, 4:5
 jobs['retrato-m'] = jobs['retrato'].resize((520, round(jobs['retrato'].height*520/jobs['retrato'].width)), Image.LANCZOS)
 og = raw/'og.png'
 m = {}

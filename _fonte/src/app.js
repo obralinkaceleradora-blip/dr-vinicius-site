@@ -86,6 +86,17 @@
     }, .6);
   }
 
+  /* celular: dúvidas começam com 4 perguntas e um botão para ver as outras */
+  (function(){
+    var faq = doc.querySelector('.faq'); if(!faq) return;
+    var n = all('details', faq).length; if(n <= 4) return;
+    faq.classList.add('short');
+    var b = doc.createElement('button'); b.type = 'button'; b.className = 'faq-more';
+    b.textContent = 'Ver mais ' + (n - 4) + ' perguntas';
+    b.addEventListener('click', function(){ faq.classList.remove('short'); b.remove(); dl.push({event:'abriu_mais_duvidas'}); });
+    faq.appendChild(b);
+  })();
+
   /* celular: a barra fixa aparece depois que o botão da abertura sai da tela
      e some enquanto outro botão igual estiver visível (nunca dois na mesma tela) */
   (function(){
