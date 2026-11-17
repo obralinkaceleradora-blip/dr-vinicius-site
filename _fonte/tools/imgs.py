@@ -32,7 +32,7 @@ jobs['protese-capa'] = Image.open(raw/'capa-protese.jpg').convert('RGB').crop((8
 jobs['clareamento'] = Image.open(raw/'capa-clareamento.png').convert('RGB').crop((250, 190, 1230, 1023))  # capa do card de clareamento
 # galeria "Feito sob medida": fotos do laboratório recortadas em quadrado, centradas na peça
 LAB = {1:(100,480,780,1160),2:(50,650,810,1410),3:(115,440,815,1140),4:(130,320,890,1080),5:(80,420,800,1140),
-       6:(240,35,1000,795),7:(120,320,1080,1280),8:(305,110,985,790),9:(20,440,720,1140)}
+       6:(240,35,1000,795),7:(120,320,1080,1280),8:(650,170,1950,1470),9:(20,440,720,1140)}
 for i, box in LAB.items():
     jobs[f'lab{i}'] = Image.open(raw/'lab'/f'lab{i}.jpg').convert('RGB').crop(box)
 jobs['retrato-m'] = jobs['retrato'].resize((520, round(jobs['retrato'].height*520/jobs['retrato'].width)), Image.LANCZOS)
