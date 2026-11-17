@@ -219,7 +219,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .place h3{font-size:.8rem;color:var(--muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
 .place address{font-style:normal;font-size:1.08rem;line-height:1.55;color:var(--ink);font-weight:600}
 .place .row{display:flex;flex-wrap:wrap;gap:10px}
-.phone{font-variant-numeric:tabular-nums;font-weight:700;color:var(--ink);text-decoration:underline;text-decoration-color:var(--cta);text-underline-offset:3px}
+.phone{white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:700;color:var(--ink);text-decoration:underline;text-decoration-color:var(--cta);text-underline-offset:3px}
 
 footer{border-top:1px solid var(--line);padding-block:24px;font-size:.84rem;color:var(--muted)}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
@@ -273,6 +273,15 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   .badge{font-size:.74rem;padding:8px 12px 8px 8px}
   .badge i{width:30px;height:30px}
 
+  /* localização compacta: foto da placa ao lado do endereço, botão do mapa embaixo */
+  .place{grid-template-columns:104px 1fr;column-gap:16px;row-gap:6px;padding:14px;align-items:start}
+  .place-photo{grid-row:1 / span 3;margin:0;aspect-ratio:4/5;border-radius:12px}
+  .place h3{font-size:.72rem}
+  .place address{font-size:.95rem;line-height:1.45}
+  .place p{font-size:.88rem}
+  .place .row{grid-column:1 / -1;margin-top:6px}
+  .place .btn-line{width:100%;justify-content:center}
+  .final-card{gap:20px;padding:24px 18px}
   /* carrosséis */
   .swipe-hint{display:flex;align-items:center;gap:8px;margin-top:-4px;font-size:.82rem;font-weight:600;color:var(--navy)}
   .swipe-hint::before{content:"";width:28px;height:2px;border-radius:2px;background:var(--navy);opacity:.4}
