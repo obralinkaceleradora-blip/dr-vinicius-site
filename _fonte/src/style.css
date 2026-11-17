@@ -214,6 +214,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .final-card h2{color:var(--ink)}
 .final-copy{display:grid;gap:var(--gap);min-width:0}
 .place{background:#fff;color:var(--text);border-radius:var(--r);padding:26px;box-shadow:var(--shadow);display:grid;gap:14px}
+.place-photo{margin:-12px -12px 4px;border-radius:calc(var(--r) - 6px);overflow:hidden;aspect-ratio:1;background:var(--mist)}
+.place-photo img{width:100%;height:100%;object-fit:cover;object-position:center}
 .place h3{font-size:.8rem;color:var(--muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
 .place address{font-style:normal;font-size:1.08rem;line-height:1.55;color:var(--ink);font-weight:600}
 .place .row{display:flex;flex-wrap:wrap;gap:10px}
